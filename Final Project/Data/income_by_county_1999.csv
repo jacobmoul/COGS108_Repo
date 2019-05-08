@@ -1,0 +1,61 @@
+GEO.id,GEO.id2,GEO.display-label,GCT_STUB.target-geo-id,GCT_STUB.target-geo-id2,GCT_STUB.display-label,GCT_STUB.display-label,HC04,HC10
+Id,Id2,Geography,Target Geo Id,Target Geo Id2,Geographical Area,Geographical Area,Per capita income in 1999 (dollars),Income in 1999 below poverty level - Percent of population for whom poverty status is determined - All ages
+0400000US06,06,California,0400000US06,06,California,California,22711,14.2
+0400000US06,06,California,0500000US06001,06001,California - Alameda County,Alameda County,26680,11.0
+0400000US06,06,California,0500000US06003,06003,California - Alpine County,Alpine County,24431,19.5
+0400000US06,06,California,0500000US06005,06005,California - Amador County,Amador County,22412,9.2
+0400000US06,06,California,0500000US06007,06007,California - Butte County,Butte County,17517,19.8
+0400000US06,06,California,0500000US06009,06009,California - Calaveras County,Calaveras County,21420,11.8
+0400000US06,06,California,0500000US06011,06011,California - Colusa County,Colusa County,14730,16.1
+0400000US06,06,California,0500000US06013,06013,California - Contra Costa County,Contra Costa County,30615,7.6
+0400000US06,06,California,0500000US06015,06015,California - Del Norte County,Del Norte County,14573,20.2
+0400000US06,06,California,0500000US06017,06017,California - El Dorado County,El Dorado County,25560,7.1
+0400000US06,06,California,0500000US06019,06019,California - Fresno County,Fresno County,15495,22.9
+0400000US06,06,California,0500000US06021,06021,California - Glenn County,Glenn County,14069,18.1
+0400000US06,06,California,0500000US06023,06023,California - Humboldt County,Humboldt County,17203,19.5
+0400000US06,06,California,0500000US06025,06025,California - Imperial County,Imperial County,13239,22.6
+0400000US06,06,California,0500000US06027,06027,California - Inyo County,Inyo County,19639,12.6
+0400000US06,06,California,0500000US06029,06029,California - Kern County,Kern County,15760,20.8
+0400000US06,06,California,0500000US06031,06031,California - Kings County,Kings County,15848,19.5
+0400000US06,06,California,0500000US06033,06033,California - Lake County,Lake County,16825,17.6
+0400000US06,06,California,0500000US06035,06035,California - Lassen County,Lassen County,14749,14.0
+0400000US06,06,California,0500000US06037,06037,California - Los Angeles County,Los Angeles County,20683,17.9
+0400000US06,06,California,0500000US06039,06039,California - Madera County,Madera County,14682,21.4
+0400000US06,06,California,0500000US06041,06041,California - Marin County,Marin County,44962,6.6
+0400000US06,06,California,0500000US06043,06043,California - Mariposa County,Mariposa County,18190,14.8
+0400000US06,06,California,0500000US06045,06045,California - Mendocino County,Mendocino County,19443,15.9
+0400000US06,06,California,0500000US06047,06047,California - Merced County,Merced County,14257,21.7
+0400000US06,06,California,0500000US06049,06049,California - Modoc County,Modoc County,17285,21.5
+0400000US06,06,California,0500000US06051,06051,California - Mono County,Mono County,23422,11.5
+0400000US06,06,California,0500000US06053,06053,California - Monterey County,Monterey County,20165,13.5
+0400000US06,06,California,0500000US06055,06055,California - Napa County,Napa County,26395,8.3
+0400000US06,06,California,0500000US06057,06057,California - Nevada County,Nevada County,24007,8.1
+0400000US06,06,California,0500000US06059,06059,California - Orange County,Orange County,25826,10.3
+0400000US06,06,California,0500000US06061,06061,California - Placer County,Placer County,27963,5.8
+0400000US06,06,California,0500000US06063,06063,California - Plumas County,Plumas County,19391,13.1
+0400000US06,06,California,0500000US06065,06065,California - Riverside County,Riverside County,18689,14.2
+0400000US06,06,California,0500000US06067,06067,California - Sacramento County,Sacramento County,21142,14.1
+0400000US06,06,California,0500000US06069,06069,California - San Benito County,San Benito County,20932,10.0
+0400000US06,06,California,0500000US06071,06071,California - San Bernardino County,San Bernardino County,16856,15.8
+0400000US06,06,California,0500000US06073,06073,California - San Diego County,San Diego County,22926,12.4
+0400000US06,06,California,0500000US06075,06075,California - San Francisco County,San Francisco County,34556,11.3
+0400000US06,06,California,0500000US06077,06077,California - San Joaquin County,San Joaquin County,17365,17.7
+0400000US06,06,California,0500000US06079,06079,California - San Luis Obispo County,San Luis Obispo County,21864,12.8
+0400000US06,06,California,0500000US06081,06081,California - San Mateo County,San Mateo County,36045,5.8
+0400000US06,06,California,0500000US06083,06083,California - Santa Barbara County,Santa Barbara County,23059,14.3
+0400000US06,06,California,0500000US06085,06085,California - Santa Clara County,Santa Clara County,32795,7.5
+0400000US06,06,California,0500000US06087,06087,California - Santa Cruz County,Santa Cruz County,26396,11.9
+0400000US06,06,California,0500000US06089,06089,California - Shasta County,Shasta County,17738,15.4
+0400000US06,06,California,0500000US06091,06091,California - Sierra County,Sierra County,18815,11.3
+0400000US06,06,California,0500000US06093,06093,California - Siskiyou County,Siskiyou County,17570,18.6
+0400000US06,06,California,0500000US06095,06095,California - Solano County,Solano County,21731,8.3
+0400000US06,06,California,0500000US06097,06097,California - Sonoma County,Sonoma County,25724,8.1
+0400000US06,06,California,0500000US06099,06099,California - Stanislaus County,Stanislaus County,16913,16.0
+0400000US06,06,California,0500000US06101,06101,California - Sutter County,Sutter County,17428,15.5
+0400000US06,06,California,0500000US06103,06103,California - Tehama County,Tehama County,15793,17.3
+0400000US06,06,California,0500000US06105,06105,California - Trinity County,Trinity County,16868,18.7
+0400000US06,06,California,0500000US06107,06107,California - Tulare County,Tulare County,14006,23.9
+0400000US06,06,California,0500000US06109,06109,California - Tuolumne County,Tuolumne County,21015,11.4
+0400000US06,06,California,0500000US06111,06111,California - Ventura County,Ventura County,24600,9.2
+0400000US06,06,California,0500000US06113,06113,California - Yolo County,Yolo County,19365,18.4
+0400000US06,06,California,0500000US06115,06115,California - Yuba County,Yuba County,14124,20.8
