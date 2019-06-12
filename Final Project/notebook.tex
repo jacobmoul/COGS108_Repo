@@ -1,0 +1,1947 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{FinalProject\_group008}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{cogs108---final-project}{%
+\section{COGS108 - Final Project}\label{cogs108---final-project}}
+
+    \hypertarget{overview}{%
+\section{Overview}\label{overview}}
+
+    For our project, we wanted to look more in-depth on how droughts affect
+the low-income communities in California. According to the U.S. Drought
+Monitor, since 2000, the longest duration of drought(D1-D4) in
+California lasted 376 weeks beginning on December 27, 2011 and ending on
+March 5th, 2019. Normally, California is only 7\% in moderate
+drought(D2). After 2011, California was 100\% in drought and 93\% was in
+severe drought(D3). In 2015, 70\% of California was in exceptional
+drought (D4). The severe drought had a huge impact on California,
+causing water prices to rise dramatically between the year 2011 and
+2016. Take San Francisco as an example, the price of a monthly water
+bill for a family of four has increased an average of 20\%. This
+dramatic increase put additional burden on all low-income communities in
+California.
+
+One project that we found and will reference to would be from Circle
+Blue Organization. Circle Blue has been analyzing water prices in 30
+major U.S. cities since 2010 and reflecting economic circumstances for
+water utilities. Circle Blue's project could provide us a good reference
+on how to make good analysis on water prices and how they affect
+low-income communities in California during droughts.
+
+    \hypertarget{names}{%
+\section{Names}\label{names}}
+
+\begin{itemize}
+\tightlist
+\item
+  Chiehkun (Timo) Chen
+\item
+  Jordan Daley
+\item
+  Jacob Moul
+\item
+  Hannah Peterson
+\item
+  Yun (Denise) Tang
+\item
+  George Thomas
+\end{itemize}
+
+    \hypertarget{group-member-ids}{%
+\section{Group Member IDs}\label{group-member-ids}}
+
+\begin{itemize}
+\tightlist
+\item
+  A15754177
+\item
+  A92034679
+\item
+  A13548393
+\item
+  A13724073
+\item
+  A92134717
+\item
+  A12687821
+\end{itemize}
+
+    \hypertarget{to-do}{%
+\subsection{TO-DO}\label{to-do}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Add legend to chloropleth -- George
+\item
+  Clean up the research question, remove the part of analysis that we
+  didn't do.
+\item
+  Fix the question.
+\item
+  Have the data set write up for the income data.
+\item
+  Explanation of the dataset
+\item
+  Go through the thing and
+\item
+  Use percentage change of poverty instead of other indicators
+\item
+  Address no missingness because of census data
+\item
+  Rewrite the Ethics and Privacy part -- Jordan
+\item
+  Describe the linear model at the end. -- Jordan
+\item
+  Discuss the improvements.
+\item
+  Time series plots?
+\item
+\end{enumerate}
+
+    \hypertarget{research-question}{%
+\section{Research Question}\label{research-question}}
+
+    \hypertarget{question-did-the-2011-19-drought-in-california-disproportionately-affect-low-income-communities}{%
+\paragraph{Question: Did the 2011-19 drought in California
+disproportionately affect low-income
+communities?}\label{question-did-the-2011-19-drought-in-california-disproportionately-affect-low-income-communities}}
+
+This project will examine the impacts of climate change on low-income
+communities (specifically through the climatic event of drought). We
+will focus on California, because it has experienced prolonged drought
+within the past decade (for 376 consecutive weeks---Dec 2011 - March
+2019). In particular, we will investigate whether or not the California
+drought has had disproportionate negative effects on low-income
+communities compared to average and high-income communities. This
+question is important because as the effects of global warming become
+more severe, efforts must be made to protect communities that are most
+vulnerable to these negative effects.
+
+To answer this question we are planning on analyzing different
+indicators of economic well being such as unemployment rate and annual
+payroll and different effects of drought for various communities over
+time, from before during and after the most recent drought.
+
+    \hypertarget{background-and-prior-work}{%
+\subsection{Background and Prior Work}\label{background-and-prior-work}}
+
+Studying the processes that govern large-scale changes in earth's
+climate is an endeavor best left to experts within the field, but the
+effects of such changes are visible around the world. One of the most
+often cited consequences of climate change is an increase in the
+severity and frequency of natural hazards and extreme weather. On the
+east coast of the United States, coastal communities are forced to
+contend with issues such as sea level rise and an increase in the
+frequency of hurricane occurrence. On the other side of the country,
+especially in the state of California, the danger at hand is drought.
+
+According to the U.S. Drought Monitor, since 2000, the longest duration
+of drought (delineated by severity from D1-D4) in California lasted 376
+weeks, beginning in December 2011 and ending in March 2019.
+Historically, California is only 7\% in moderate drought (D2)
+conditions. After 2011, 100\% of California was said to be in drought
+and 93\% of the state was determined to be in severe drought (D3)
+conditions. In 2015, 70\% of California was in exceptional drought (D4).
+The severe drought had a huge impact on the state, causing water prices
+to rise dramatically between the year 2011 and 2016.
+
+For this project, we wanted to take an in-depth look at how drought
+affects low-income communities in California. We are interested to see
+if drought and economic census data support our idea that drought
+conditions disproportionately affect low income communities.
+
+References: -
+1)https://www.nbcnews.com/storyline/california-drought/california-drought-officially-over-after-more-seven-years-n983461
+- 2)https://droughtmonitor.unl.edu/
+
+    \hypertarget{hypothesis}{%
+\subsection{Hypothesis}\label{hypothesis}}
+
+    \hypertarget{hypothesis-the-2011-19-drought-in-california-did-disproportionately-affect-low-income-communities-negatively.}{%
+\paragraph{Hypothesis: The 2011-19 drought in California did
+disproportionately affect low-income communities
+negatively.}\label{hypothesis-the-2011-19-drought-in-california-did-disproportionately-affect-low-income-communities-negatively.}}
+
+We expect to find that these communities will have suffered more than
+relatively better-off communities because they have fewer safeguards to
+deal with environmental events, and also have less means to bear the
+cost of higher utility or healthcare rates concurred from drought, for
+example.
+
+    \hypertarget{data-sets}{%
+\section{Data Sets}\label{data-sets}}
+
+    \textbf{Community Economic Data} - Data Set Name: `cbp{[}yr{]}co.txt'
+(Years 2012-2016) - We modified these files to include only observations
+for California, and they have been renamed `cbp{[}yr{]}co\_mod.csv' -
+Source: https://www.census.gov/programs-surveys/cbp/data/datasets.html -
+Number of observations: 36616
+
+\begin{quote}
+These data sets are County Business Pattern data sets, and are provided
+with the description: ``This series includes the number of
+establishments, employment during the week of March 12, first quarter
+payroll, and annual payroll. This data is useful for studying the
+economic activity of small areas; analyzing economic changes over time;
+and as a benchmark for other statistical series, surveys, and databases
+between economic censuses''. After being condensed to just the state of
+California, the 2016 data set (out of many others) is composed of 36616
+observations of 26 variables, several of which are identifying
+information such as state or county code. In addition, it contains
+values for first quarter payroll, annual payroll, and number of
+employees, among other variables, for different industries in each
+county of California. This data comes from the US Census Bureau. All of
+these data sets are downloadable in csv format.
+\end{quote}
+
+\textbf{Drought Data} - Data Set Name: `CADrought20**.txt' (Years
+2000-2016) - Source:
+https://droughtmonitor.unl.edu/Data/DataDownload/ComprehensiveStatistics.aspx
+- Number of Observations per table: \textasciitilde{}3000
+
+\begin{quote}
+These data sets contain values for each county in California, showing
+the proportion of each county that is in Drought index D0-D4 in 5 day
+intervals. The data is collected by the United States Drought Monitor.
+The drought level is measured by D0 to D4, which describes the severity
+of drought in the specific county. There are about 3000 observations for
+13 variables in each data set. We are combining the data sets from
+different years into one, so it ads up to 48256 observations.
+\end{quote}
+
+\textbf{Unemployment Data} - Data Set Name:
+'Local\_Area\_Unemployment\_Statistics\_\_LAUS\_\_\_Annual\_Average.csv'
+(Years 1990-2017) - Source: https://www.bls.gov/lau/ - Number of
+Observations: 3017
+
+\begin{quote}
+This data contains the annual average of unemployment rate in each
+county in California. There are 9 variables.
+\end{quote}
+
+\textbf{Income Data} - Data Set Name:
+'Local\_Area\_Unemployment\_Statistics\_\_LAUS\_\_\_Annual\_Average.csv'
+(Years 1990-2017) - Source: https://www.bls.gov/lau/ - Number of
+Observations: 3017
+
+\begin{quote}
+HANNNASOLKFHJADHFI"JO
+\end{quote}
+
+\textbf{CA County Geographic Boundary Data} - Data Set Name:
+`CA\_Counties\_TIGER2016.shp' (2016) - Source:
+https://data.ca.gov/dataset/ca-geographic-boundaries - Number of
+Observations:
+
+\begin{quote}
+This data contains geographic boundary data for the counties of
+California, used to make a chloropleth map.
+\end{quote}
+
+    We merged community economic, drought data, and unemployment data sets
+by county and year.
+
+    \hypertarget{setup}{%
+\section{Setup}\label{setup}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{k+kn}{import} \PY{n+nn}{glob}
+         \PY{k+kn}{from} \PY{n+nn}{pandas}\PY{n+nn}{.}\PY{n+nn}{plotting} \PY{k}{import} \PY{n}{scatter\PYZus{}matrix}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{patsy}
+         \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{c+c1}{\PYZsh{} import geopandas as gpd}
+         \PY{c+c1}{\PYZsh{} import descartes}
+         \PY{c+c1}{\PYZsh{} import pysal as ps}
+         
+         \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{stats}\PY{n+nn}{.}\PY{n+nn}{weightstats} \PY{k}{import} \PY{n}{ttest\PYZus{}ind}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{kruskal}\PY{p}{,} \PY{n}{f\PYZus{}oneway}
+\end{Verbatim}
+
+
+    \hypertarget{data-cleaning}{%
+\section{Data Cleaning}\label{data-cleaning}}
+
+\hypertarget{county-business-patterns-data}{%
+\subsubsection{County Business Patterns
+Data}\label{county-business-patterns-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{}Import and Wrangle County Business Patterns Data}
+         
+         \PY{n}{cbp00} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp00co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp01} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp01co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp02} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp02co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp03} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp03co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp04} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp04co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp05} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp05co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp06} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp06co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp07} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp07co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp08} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp08co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp09} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp09co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp10} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp10co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp11} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp11co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp12} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp12co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp13} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp13co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp14} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp14co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp15} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp15co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cbp16} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/cb\PYZus{}patterns/cbp16co\PYZus{}mod.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{cbp00}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2000}
+         \PY{n}{cbp01}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2001}
+         \PY{n}{cbp02}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2002}
+         \PY{n}{cbp03}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2003}
+         \PY{n}{cbp04}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2004}
+         \PY{n}{cbp05}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2005}
+         \PY{n}{cbp06}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2006}
+         \PY{n}{cbp07}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2007}
+         \PY{n}{cbp08}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2008}
+         \PY{n}{cbp09}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2009}
+         \PY{n}{cbp10}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2010}
+         \PY{n}{cbp11}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2011}
+         \PY{n}{cbp12}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2012}
+         \PY{n}{cbp13}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2013}
+         \PY{n}{cbp14}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2014}
+         \PY{n}{cbp15}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2015}
+         \PY{n}{cbp16}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2016}
+         
+         \PY{n}{cbp\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{n}{cbp00}\PY{p}{,} \PY{n}{cbp01}\PY{p}{,} \PY{n}{cbp02}\PY{p}{,} \PY{n}{cbp03}\PY{p}{,} \PY{n}{cbp04}\PY{p}{,} \PY{n}{cbp05}\PY{p}{,} \PY{n}{cbp06}\PY{p}{,} \PY{n}{cbp07}\PY{p}{,} \PY{n}{cbp08}\PY{p}{,} 
+                     \PY{n}{cbp09}\PY{p}{,} \PY{n}{cbp10}\PY{p}{,} \PY{n}{cbp11}\PY{p}{,} \PY{n}{cbp12}\PY{p}{,} \PY{n}{cbp13}\PY{p}{,} \PY{n}{cbp14}\PY{p}{,} \PY{n}{cbp15}\PY{p}{,} \PY{n}{cbp16}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{} Variables to be used in CBP analysis, fips is combined state and county code; }
+         \PY{c+c1}{\PYZsh{} for others, see county\PYZus{}layout\PYZus{}2015.txt}
+         \PY{n}{cbp\PYZus{}vars} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fips}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{emp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{est}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{simplified\PYZus{}cbp\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{df} \PY{o+ow}{in} \PY{n}{cbp\PYZus{}data}\PY{p}{:}    
+             \PY{c+c1}{\PYZsh{} reformat FIPS county code for merging}
+             \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fipstate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fipscty}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fipstate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fipscty}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}
+             \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fips}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{fipstate}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{zfill}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{n}{df}\PY{o}{.}\PY{n}{fipscty}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{zfill}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} select aggregate county data}
+             \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{naics} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} drop unneccesary columns}
+             \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{cbp\PYZus{}vars}\PY{p}{]}
+             
+             \PY{n}{simplified\PYZus{}cbp\PYZus{}data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{cbp\PYZus{}final} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{n}{simplified\PYZus{}cbp\PYZus{}data}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{cbp\PYZus{}final} \PY{o}{=} \PY{n}{cbp\PYZus{}final}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fips}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{emp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{employment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{annual\PYZus{}payroll}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                               \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{est}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{establishments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{drought-data}{%
+\subsubsection{Drought Data}\label{drought-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{}Import and Wrangle Drought Data}
+         
+         \PY{c+c1}{\PYZsh{} collect all drought file names}
+         \PY{n}{drought\PYZus{}files} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/drought/*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} import all drought tables}
+         \PY{n}{drought\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{file} \PY{o+ow}{in} \PY{n}{drought\PYZus{}files}\PY{p}{:}
+             \PY{n}{drought\PYZus{}data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{file}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{simplified\PYZus{}drought\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{df} \PY{o+ow}{in} \PY{n}{drought\PYZus{}data}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} add year column, reformat FIPS column for merging}
+             \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{ValidStart}\PY{p}{)}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{year}
+             \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{FIPS}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{zfill}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} make sure only CA data included}
+             \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{FIPS}\PY{o}{.}\PY{n}{str}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{06}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} average drought index per county per year}
+             \PY{n}{by\PYZus{}year} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{County}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+             \PY{n}{by\PYZus{}year}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{Year}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             
+             \PY{n}{simplified\PYZus{}drought\PYZus{}data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{by\PYZus{}year}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{drought\PYZus{}final} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{n}{simplified\PYZus{}drought\PYZus{}data}\PY{p}{)}
+         \PY{n}{drought\PYZus{}final} \PY{o}{=} \PY{n}{drought\PYZus{}final}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no\PYZus{}drought}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{County}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{unemployment-data}{%
+\subsubsection{Unemployment Data}\label{unemployment-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} Import and Wrangle Unemployment Data}
+         \PY{n}{unemploy} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/Local\PYZus{}Area\PYZus{}Unemployment\PYZus{}Statistics\PYZus{}\PYZus{}LAUS\PYZus{}\PYZus{}\PYZus{}Annual\PYZus{}Average.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} select county unemployment data}
+         \PY{n}{unemploy} \PY{o}{=} \PY{n}{unemploy}\PY{p}{[}\PY{p}{(}\PY{n}{unemploy}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{County}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{unemploy}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2017}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} select desired variable}
+         \PY{n}{unemploy} \PY{o}{=} \PY{n}{unemploy}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unemployment Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} rename columns for merging}
+         \PY{n}{unemploy} \PY{o}{=} \PY{n}{unemploy}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unemployment Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unemployment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{socioeconomic-data}{%
+\subsubsection{Socioeconomic Data}\label{socioeconomic-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{income} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/income\PYZus{}by\PYZus{}county\PYZus{}1999.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{income} \PY{o}{=} \PY{n}{income}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{:}\PY{p}{]}
+         \PY{n}{income} \PY{o}{=} \PY{n}{income}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n}{income}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+                                                   \PY{n}{income}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income\PYZus{}avg\PYZus{}per\PYZus{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                   \PY{n}{income}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poverty\PYZus{}percent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{income}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:}            county  income\_avg\_per\_capita  poverty\_percent
+         0      California                  22711             14.2
+         1  Alameda County                  26680             11.0
+         2   Alpine County                  24431             19.5
+         3   Amador County                  22412              9.2
+         4    Butte County                  17517             19.8
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{income}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of counties by percentage of population in poverty}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poverty rate (}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{income}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{income}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Income vs. poverty percentage per county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poverty rate (}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income (\PYZdl{}/year)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We assigned three socioeconomic groups based on the poverty percentage
+histogram above. The roughly trimodal distribution allows for binning of
+three socioeconomic groups: `Low', `Middle', and `High'. Also, notice
+the negative relationship between income and poverty percentage
+displayed in the scatter plot.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{k}{def} \PY{n+nf}{assign\PYZus{}group}\PY{p}{(}\PY{n}{poverty}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{poverty} \PY{o}{\PYZgt{}} \PY{l+m+mf}{17.5}\PY{p}{:}
+                 \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low}\PY{l+s+s1}{\PYZsq{}}
+             \PY{k}{elif} \PY{n}{poverty} \PY{o}{\PYZgt{}} \PY{l+m+mi}{10}\PY{p}{:}
+                 \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Middle}\PY{l+s+s1}{\PYZsq{}}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High}\PY{l+s+s1}{\PYZsq{}}
+             
+         \PY{n}{income}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ses\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Categorical}\PY{p}{(}\PY{n}{income}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{assign\PYZus{}group}\PY{p}{)}\PY{p}{,} 
+                                                     \PY{n}{categories}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                                     \PY{n}{ordered}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{} Counts of number of counties per socioeconomic group}
+         \PY{n}{income}\PY{o}{.}\PY{n}{ses\PYZus{}group}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:} Middle    26
+         Low       20
+         High      13
+         Name: ses\_group, dtype: int64
+\end{Verbatim}
+            
+    \hypertarget{final-data-frame}{%
+\subsection{Final Data Frame}\label{final-data-frame}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{} FIPS (Federal Information Processing Standards) is the county code}
+         
+         \PY{n}{first\PYZus{}merge} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{left}\PY{o}{=}\PY{n}{cbp\PYZus{}final}\PY{p}{,} \PY{n}{right}\PY{o}{=}\PY{n}{drought\PYZus{}final}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{outer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{project\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{left}\PY{o}{=}\PY{n}{first\PYZus{}merge}\PY{p}{,} \PY{n}{right}\PY{o}{=}\PY{n}{unemploy}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}rearrange the columns}
+         \PY{n}{project\PYZus{}df}\PY{o}{=}\PY{n}{project\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{annual\PYZus{}payroll}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{establishments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{employment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unemployment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no\PYZus{}drought}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{project\PYZus{}df} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{income}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{project\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:}     FIPS          county  year  annual\_payroll  establishments  employment  \textbackslash{}
+         0  06001  Alameda County  2000        28627936           36391      655730   
+         1  06001  Alameda County  2001        29759500           36468      670375   
+         2  06001  Alameda County  2002        29206644           36772      653437   
+         3  06001  Alameda County  2003        28571099           36706      625672   
+         4  06001  Alameda County  2004        29886705           36799      626076   
+         
+            unemployment  no\_drought         D0         D1   D2   D3   D4  \textbackslash{}
+         0           3.6   97.862500   2.137500   0.000000  0.0  0.0  0.0   
+         1           4.8   58.674151  41.325849  21.028868  0.0  0.0  0.0   
+         2           6.7   45.283019  54.716981   0.000000  0.0  0.0  0.0   
+         3           6.8   94.539811   5.460189   0.000000  0.0  0.0  0.0   
+         4           5.9   69.212642  30.787358   0.000000  0.0  0.0  0.0   
+         
+            income\_avg\_per\_capita  poverty\_percent ses\_group  
+         0                  26680             11.0    Middle  
+         1                  26680             11.0    Middle  
+         2                  26680             11.0    Middle  
+         3                  26680             11.0    Middle  
+         4                  26680             11.0    Middle  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{} Assign numeric values to each SES Group value, from low to high}
+         \PY{k}{def} \PY{n+nf}{assign\PYZus{}index}\PY{p}{(}\PY{n}{group}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{group} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{1}
+             \PY{k}{elif} \PY{n}{group} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{2}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{3}
+             
+         \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ses\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ses\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{assign\PYZus{}index}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{} Create a chloropleth map of SES Groups throughout California}
+         
+         \PY{n}{fp} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Data/CA\PYZus{}Counties/CA\PYZus{}Counties\PYZus{}TIGER2016.shp}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{n}{map\PYZus{}df} \PY{o}{=} \PY{n}{gpd}\PY{o}{.}\PY{n}{read\PYZus{}file}\PY{p}{(}\PY{n}{fp}\PY{p}{)}
+         \PY{n}{data\PYZus{}for\PYZus{}map} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ses\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poverty\PYZus{}percent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{map\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+         \PY{n}{merged} \PY{o}{=} \PY{n}{map\PYZus{}df}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NAMELSAD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}for\PYZus{}map}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} set variable for map}
+         \PY{n}{variable} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ses\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}
+         \PY{c+c1}{\PYZsh{} set chloropleth range}
+         \PY{n}{vmin}\PY{p}{,} \PY{n}{vmax} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}
+         \PY{c+c1}{\PYZsh{} create figure and axes}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{merged}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{column}\PY{o}{=}\PY{n}{variable}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Blues}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0.8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{scheme} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal\PYZus{}interval}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{legend}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SES Index of CA Counties}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontdict}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fontsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{25}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fontweight}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{leg} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{leg}\PY{o}{.}\PY{n}{get\PYZus{}texts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}text}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{leg}\PY{o}{.}\PY{n}{get\PYZus{}texts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}text}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{leg}\PY{o}{.}\PY{n}{get\PYZus{}texts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}text}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        NameError                                 Traceback (most recent call last)
+
+        <ipython-input-49-6f91ae9ed343> in <module>()
+          3 fp = "Data/CA\_Counties/CA\_Counties\_TIGER2016.shp"
+          4 
+    ----> 5 map\_df = gpd.read\_file(fp)
+          6 data\_for\_map = project\_df.filter(['county','ses\_index','poverty\_percent'], axis=1)
+          7 map\_df.head()
+
+
+        NameError: name 'gpd' is not defined
+
+    \end{Verbatim}
+
+    Here we assign drought ``levels'' to each county on a scale of 0-3. This
+feature was added to simplify the D0-D4 variables. The D0-D4 variables
+represent the geographical proportion of a given county that is
+experiencing a particular drought intensity, where
+
+\begin{itemize}
+\tightlist
+\item
+  No Drought = no drought
+\item
+  D0 = abnormally dry
+\item
+  D1 = moderate drought
+\item
+  D2 = severe drought
+\item
+  D3 = extreme drought
+\item
+  D4 = exceptional drought
+\end{itemize}
+
+With this in mind, and due to the small number of large values for
+extreme and exceptional drought, we marked any county as experiencing
+level 3 drought (severe or more) if more than half of its area is in
+D2-D4. Likewise, a county is experiencing level 2 drought (moderate
+drought) if more than half its area is in D1, level 1 drought
+(abnormally dry) if more than half its area is in D0, and not
+experiencing drought otherwise.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{c+c1}{\PYZsh{} assign \PYZdq{}drought levels\PYZdq{} to facilitate analysis}
+         
+         \PY{k}{def} \PY{n+nf}{assign\PYZus{}drought}\PY{p}{(}\PY{n}{row}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{50}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{3}
+             \PY{k}{elif} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{50}\PY{p}{:} 
+                 \PY{k}{return} \PY{l+m+mi}{2}
+             \PY{k}{elif} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{50}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{1}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{0}
+             
+         \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought\PYZus{}level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{assign\PYZus{}drought}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} create new feature to make payroll numbers less relative}
+         \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pay\PYZus{}per\PYZus{}employee}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{annual\PYZus{}payroll}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{employment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{project\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:}     FIPS          county  year  annual\_payroll  establishments  employment  \textbackslash{}
+         0  06001  Alameda County  2000        28627936           36391      655730   
+         1  06001  Alameda County  2001        29759500           36468      670375   
+         2  06001  Alameda County  2002        29206644           36772      653437   
+         3  06001  Alameda County  2003        28571099           36706      625672   
+         4  06001  Alameda County  2004        29886705           36799      626076   
+         
+            unemployment  no\_drought         D0         D1   D2   D3   D4  \textbackslash{}
+         0           3.6   97.862500   2.137500   0.000000  0.0  0.0  0.0   
+         1           4.8   58.674151  41.325849  21.028868  0.0  0.0  0.0   
+         2           6.7   45.283019  54.716981   0.000000  0.0  0.0  0.0   
+         3           6.8   94.539811   5.460189   0.000000  0.0  0.0  0.0   
+         4           5.9   69.212642  30.787358   0.000000  0.0  0.0  0.0   
+         
+            income\_avg\_per\_capita  poverty\_percent ses\_group ses\_index  drought\_level  \textbackslash{}
+         0                  26680             11.0    Middle         2              0   
+         1                  26680             11.0    Middle         2              0   
+         2                  26680             11.0    Middle         2              1   
+         3                  26680             11.0    Middle         2              0   
+         4                  26680             11.0    Middle         2              0   
+         
+            pay\_per\_employee  
+         0         43.658115  
+         1         44.392318  
+         2         44.696955  
+         3         45.664660  
+         4         47.736545  
+\end{Verbatim}
+            
+    The D0 - D4 columns above were recorded as rolling sums, meaning that
+the percentage of a county that experienced some level of drought was
+recorded as having experienced all lower severity levels of drought as
+well. This was normalized (????? correct word??????) in the table below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{drought\PYZus{}levels} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{no\PYZus{}drought}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{drought\PYZus{}levels}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no\PYZus{}drought}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no\PYZus{}drought}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{drought\PYZus{}levels}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lvl0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{drought\PYZus{}levels}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lvl1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{drought\PYZus{}levels}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lvl2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{drought\PYZus{}levels}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lvl3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{drought\PYZus{}levels}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lvl4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{drought\PYZus{}levels}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:}     FIPS          county  year  annual\_payroll  establishments  employment  \textbackslash{}
+         0  06001  Alameda County  2000        28627936           36391      655730   
+         1  06001  Alameda County  2001        29759500           36468      670375   
+         2  06001  Alameda County  2002        29206644           36772      653437   
+         3  06001  Alameda County  2003        28571099           36706      625672   
+         4  06001  Alameda County  2004        29886705           36799      626076   
+         
+            unemployment  income\_avg\_per\_capita  poverty\_percent ses\_group ses\_index  \textbackslash{}
+         0           3.6                  26680             11.0    Middle         2   
+         1           4.8                  26680             11.0    Middle         2   
+         2           6.7                  26680             11.0    Middle         2   
+         3           6.8                  26680             11.0    Middle         2   
+         4           5.9                  26680             11.0    Middle         2   
+         
+            drought\_level  pay\_per\_employee  no\_drought       lvl0       lvl1  lvl2  \textbackslash{}
+         0              0         43.658115   97.862500   2.137500   0.000000   0.0   
+         1              0         44.392318   58.674151  20.296981  21.028868   0.0   
+         2              1         44.696955   45.283019  54.716981   0.000000   0.0   
+         3              0         45.664660   94.539811   5.460189   0.000000   0.0   
+         4              0         47.736545   69.212642  30.787358   0.000000   0.0   
+         
+            lvl3  lvl4  
+         0   0.0   0.0  
+         1   0.0   0.0  
+         2   0.0   0.0  
+         3   0.0   0.0  
+         4   0.0   0.0  
+\end{Verbatim}
+            
+    \hypertarget{data-analysis-results}{%
+\section{Data Analysis \& Results}\label{data-analysis-results}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Descriptive Analysis on Unemployment}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}Central Tendency, Variability}
+         \PY{n}{project\PYZus{}df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:}               year  annual\_payroll  establishments    employment  \textbackslash{}
+         count   986.000000    9.860000e+02      986.000000  9.860000e+02   
+         mean   2008.000000    1.098268e+07    14822.783976  2.264094e+05   
+         std       4.901466    2.725970e+07    35173.618793  5.530495e+05   
+         min    2000.000000    4.053000e+03       35.000000  1.620000e+02   
+         25\%    2004.000000    2.605378e+05      915.750000  8.930250e+03   
+         50\%    2008.000000    1.547160e+06     3914.000000  4.572900e+04   
+         75\%    2012.000000    6.516260e+06    12078.750000  1.663308e+05   
+         max    2016.000000    2.128736e+08   269489.000000  4.007163e+06   
+         
+                unemployment  no\_drought          D0          D1          D2  \textbackslash{}
+         count    986.000000  986.000000  986.000000  986.000000  986.000000   
+         mean       8.810649   42.027815   57.972185   42.710534   27.444563   
+         std        3.878966   40.470664   40.470664   41.357286   36.588673   
+         min        2.900000    0.000000    0.000000    0.000000    0.000000   
+         25\%        5.800000    0.438019    9.456299    0.000000    0.000000   
+         50\%        8.100000   27.013113   72.986887   31.957075    1.740755   
+         75\%       10.700000   90.543701   99.561981   86.688538   52.830189   
+         max       28.900000  100.000000  100.000000  100.000000  100.000000   
+         
+                        D3          D4  income\_avg\_per\_capita  poverty\_percent  \textbackslash{}
+         count  986.000000  986.000000             986.000000       986.000000   
+         mean    14.475111    7.364515           20892.258621        14.500000   
+         std     31.578546   22.143001            6131.120533         4.912018   
+         min      0.000000    0.000000           13239.000000         5.800000   
+         25\%      0.000000    0.000000           16856.000000        11.000000   
+         50\%      0.000000    0.000000           19417.000000        14.250000   
+         75\%      2.420755    0.000000           24007.000000        18.600000   
+         max    100.000000  100.000000           44962.000000        23.900000   
+         
+                drought\_level  pay\_per\_employee  
+         count     986.000000        986.000000  
+         mean        1.326572         37.126181  
+         std         1.245843         13.366675  
+         min         0.000000         10.734532  
+         25\%         0.000000         29.059193  
+         50\%         1.000000         34.512671  
+         75\%         3.000000         41.540011  
+         max         3.000000        112.484143  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}size}
+         \PY{n}{project\PYZus{}df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} (986, 19)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Missing Values}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{project\PYZus{}df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Missing Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:}                        Number of Missing Values
+         FIPS                                          0
+         county                                        0
+         year                                          0
+         annual\_payroll                                0
+         establishments                                0
+         employment                                    0
+         unemployment                                  0
+         no\_drought                                    0
+         D0                                            0
+         D1                                            0
+         D2                                            0
+         D3                                            0
+         D4                                            0
+         income\_avg\_per\_capita                         0
+         poverty\_percent                               0
+         ses\_group                                     0
+         ses\_index                                     0
+         drought\_level                                 0
+         pay\_per\_employee                              0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{avg\PYZus{}per\PYZus{}year\PYZus{}df} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ses\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{employment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{annual\PYZus{}payroll}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{establishments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unemployment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                                             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pay\PYZus{}per\PYZus{}employee}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought\PYZus{}level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{sns}\PY{o}{.}\PY{n}{pointplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought\PYZus{}level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ses\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{avg\PYZus{}per\PYZus{}year\PYZus{}df}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{color\PYZus{}palette}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YlOrRd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{sca}\PY{p}{(}\PY{n}{ax}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{,} \PY{n}{ax3}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{pointplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pay\PYZus{}per\PYZus{}employee}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ses\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought\PYZus{}level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{avg\PYZus{}per\PYZus{}year\PYZus{}df}\PY{p}{,} 
+                      \PY{n}{legend}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{false}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax1}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SES Group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1\PYZus{}1} \PY{o}{=} \PY{n}{ax1}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{pointplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought\PYZus{}level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{avg\PYZus{}per\PYZus{}year\PYZus{}df}\PY{p}{,} 
+                      \PY{n}{legend}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{false}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax1\PYZus{}1}\PY{p}{,} \PY{n}{markers}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1\PYZus{}1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lower right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{sns}\PY{o}{.}\PY{n}{pointplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{establishments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ses\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{avg\PYZus{}per\PYZus{}year\PYZus{}df}\PY{p}{,} 
+                      \PY{n}{legend}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{false}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax2}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SES Group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2\PYZus{}1} \PY{o}{=} \PY{n}{ax2}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{pointplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought\PYZus{}level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{avg\PYZus{}per\PYZus{}year\PYZus{}df}\PY{p}{,} 
+                      \PY{n}{legend}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{false}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax2\PYZus{}1}\PY{p}{,} \PY{n}{markers}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2\PYZus{}1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{sns}\PY{o}{.}\PY{n}{pointplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unemployment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ses\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{avg\PYZus{}per\PYZus{}year\PYZus{}df}\PY{p}{,} 
+                      \PY{n}{legend}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{false}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax3}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SES Group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3\PYZus{}1} \PY{o}{=} \PY{n}{ax3}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{pointplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought\PYZus{}level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{avg\PYZus{}per\PYZus{}year\PYZus{}df}\PY{p}{,} 
+                      \PY{n}{ax}\PY{o}{=}\PY{n}{ax3\PYZus{}1}\PY{p}{,} \PY{n}{markers}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3\PYZus{}1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{ax} \PY{o+ow}{in} \PY{n}{fig}\PY{o}{.}\PY{n}{axes}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{sca}\PY{p}{(}\PY{n}{ax}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{change-per-year-for-each-variable-by-income-and-drought-group}{%
+\subsubsection{Change Per year for each variable by income and drought
+group}\label{change-per-year-for-each-variable-by-income-and-drought-group}}
+
+    This data frame contains the average change per year in each of the
+variables, grouped by drought level and socioeconomic group. In other
+words, each row contains one measured difference between subsequent
+years for all variables in that group. For example, the group
+DroughtLevel = 0, SESGroup = Low is the collection of all yearly
+differences of each variable for counties under these two designations.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{c+c1}{\PYZsh{} keep only desired variables}
+         \PY{n}{temp\PYZus{}df} \PY{o}{=} \PY{n}{project\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{no\PYZus{}drought}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income\PYZus{}avg\PYZus{}per\PYZus{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poverty\PYZus{}percent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} group by year, drought level, and SES}
+         \PY{c+c1}{\PYZsh{} average values for each group for each year}
+         \PY{c+c1}{\PYZsh{} use function diff to find difference between average values for each year}
+         \PY{n}{temp\PYZus{}df} \PY{o}{=} \PY{p}{(}\PY{n}{temp\PYZus{}df}
+          \PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought\PYZus{}level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ses\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+          \PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought\PYZus{}level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ses\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} divide by year column to make differences all in terms of 1 year}
+         \PY{c+c1}{\PYZsh{} drop Year column as it is no longer meaningful}
+         \PY{n}{change\PYZus{}per\PYZus{}year\PYZus{}df} \PY{o}{=} \PY{n}{temp\PYZus{}df}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x} \PY{o}{/} \PY{n}{temp\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{change\PYZus{}per\PYZus{}year\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{29}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:}                             annual\_payroll     employment  establishments  \textbackslash{}
+         drought\_level ses\_group                                                     
+         0             Low       3     2.179051e+07  587884.750000    34485.900000   
+                                 14   -2.972880e+07 -812549.250000   -47756.950000   
+                                 24    1.045914e+07  277242.187500    17084.625000   
+                                 32   -1.021516e+07 -272067.937500   -16935.446429   
+                                 40    9.149754e+06  221660.100000    14250.171429   
+                                 43    1.253376e+06   18423.742105     1059.242105   
+                                 48   -1.036338e+07 -237240.842105   -14801.842105   
+                                 57   -4.694375e+05  -16493.000000    -1564.000000   
+                                 66   -7.990000e+02    -207.000000      -36.000000   
+                                 75    1.152517e+07  246437.500000    16916.833333   
+                                 82   -8.641915e+05  -20868.700000    -1658.083333   
+                                 85   -1.038117e+07 -217406.800000   -14411.416667   
+                       Middle    4     8.100817e+06  204387.240000    12085.993333   
+                                 15   -1.537682e+07 -391148.000000   -22425.833333   
+                                 25    8.720754e+06  203846.000000    11603.500000   
+                                 33    1.045789e+06  -27994.333333    -2392.500000   
+                                 41   -7.453361e+05   24796.813333     2446.240000   
+                                 44    4.511326e+05   -4292.438333     -440.948333   
+                                 76    4.804450e+05    6218.275298      756.593750   
+                                 83   -1.423176e+06  -37225.062857    -2847.306667   
+                                 86    1.873205e+07  368719.920000    24826.140000   
+                       High      5     8.887807e+06  160674.397436     7505.089744   
+                                 16   -1.460375e+07 -219797.166667    -7528.666667   
+                                 26    4.087759e+06   49079.076923       84.730769   
+                                 34    6.399536e+06   89458.208791     5242.197802   
+                                 42   -5.074864e+06  -82522.978022    -4903.274725   
+                                 45    7.750359e+05    3967.692308      168.615385   
+                                 77    6.121902e+04   -4435.634615     -110.942308   
+                                 84    5.033754e+05     629.538462       -4.230769   
+         
+                                     pay\_per\_employee  unemployment  
+         drought\_level ses\_group                                     
+         0             Low       3           3.472633      1.890000  
+                                 14         -5.688737     -1.645000  
+                                 24          5.997886      0.843750  
+                                 32         -0.765060     -0.961607  
+                                 40          1.670882      0.017857  
+                                 43          1.407662     -1.032895  
+                                 48         -3.681963     -0.742105  
+                                 57         -0.919752      2.100000  
+                                 66          1.030575      3.000000  
+                                 75          6.689554      4.094444  
+                                 82          0.813562     -0.179444  
+                                 85         -3.982765     -3.148333  
+                       Middle    4           4.660038     -0.468333  
+                                 15         -7.588905      1.558333  
+                                 25          5.814823      0.795000  
+                                 33          5.084630      0.038333  
+                                 41         -3.312640     -1.295333  
+                                 44          1.338684     -0.438000  
+                                 76          1.154369      1.823214  
+                                 83         -0.167007     -0.190857  
+                                 86          2.317225     -3.502000  
+                       High      5           7.245922      0.606410  
+                                 16         -6.018736      0.316667  
+                                 26         -0.117489      1.207692  
+                                 34          8.800989     -0.907692  
+                                 42         -5.377894     -0.230769  
+                                 45          1.835329     -0.446154  
+                                 77          1.042636      1.694231  
+                                 84          1.493861     -0.646154  
+\end{Verbatim}
+            
+    \hypertarget{tests-for-effect-of-drought-on-economic-performance-across-ses-groups}{%
+\subsection{Tests for Effect of Drought on Economic Performance across
+SES
+Groups}\label{tests-for-effect-of-drought-on-economic-performance-across-ses-groups}}
+
+    In this section, we used the \texttt{change\_per\_year\_df} that
+contains the yearly changes for each variable across each Drought-SES
+grouping. To test for effect of drought level on Economic Performance we
+chose three variables--Unemployment, Number of Establishments, and Pay
+Per Employee--and performed difference of mean tests for these variables
+across the different groups. Independent 2-sample t-tests or ANOVA tests
+were used where appropriate, and where assumptions were violated, the
+non-parametric Kruskal-Wallis test was used.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} collect the data groups into dictionaries for ease of access}
+         
+         \PY{n}{temp} \PY{o}{=} \PY{n}{change\PYZus{}per\PYZus{}year\PYZus{}df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drought\PYZus{}level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ses\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{unemp\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{n}{est\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{n}{ppe\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{df} \PY{o+ow}{in} \PY{n}{temp}\PY{p}{:}
+             \PY{n}{key} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{, SES: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{name}\PY{p}{)}
+             \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{unemployment}
+             \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{establishments}
+             \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{pay\PYZus{}per\PYZus{}employee}
+\end{Verbatim}
+
+
+    \hypertarget{unemployment-comparisons-by-drought-level-and-ses-group}{%
+\subsubsection{Unemployment Comparisons by Drought Level and SES
+Group}\label{unemployment-comparisons-by-drought-level-and-ses-group}}
+
+    First, overall effects of drought on Unemployment Rates were tested,
+without specifying different socio-economic groups.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} separate different groups}
+         
+         \PY{n}{unemploy\PYZus{}none} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{unemploy\PYZus{}dry} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{unemploy\PYZus{}moderate} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{unemploy\PYZus{}severe} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{a1}\PY{p}{,} \PY{n}{a2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yearly change in Unemployment distributions, by Drought Level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{a1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{unemploy\PYZus{}none}\PY{p}{)} 
+         \PY{n}{a1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{a1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{unemploy\PYZus{}dry}\PY{p}{)}
+         \PY{n}{a1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: abnormally dry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{a2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{unemploy\PYZus{}moderate}\PY{p}{)} 
+         \PY{n}{a2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: moderate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{a2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{unemploy\PYZus{}severe}\PY{p}{)}
+         \PY{n}{a2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The following table shows the result of comparing all pairs of drought
+levels and performing t-tests on their yearly change in unemployment
+means. The table shows that no significant differences in means were
+found at a significance level of \(\alpha = 0.05\), which suggests that
+drought levels do not affect economic performance overall. These results
+were verified with the ANOVA test (\texttt{f\_oneway}), and because of
+the skew of the last distribution, the non-parametric Kruskal-Wallis
+test was used to make sure our conclusions were valid (see following two
+cells). All tests showed lack of significant effect.
+
+We used \texttt{alternative=\textquotesingle{}smaller\textquotesingle{}}
+because we hypothesized that the change in unemployment rates would be
+smaller (smaller in magnitude or more negative) for counties
+experiencing less severe drought.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Overall Comparisons for Change in Unemployment by Drought Level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} perform 2 sample t\PYZhy{}test on all pairs of drought levels}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}
+             \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None \PYZhy{} Dry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{unemploy\PYZus{}none}\PY{p}{,} \PY{n}{unemploy\PYZus{}dry}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{smaller}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None \PYZhy{} Moderate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{unemploy\PYZus{}none}\PY{p}{,} \PY{n}{unemploy\PYZus{}moderate}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{smaller}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} 
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None \PYZhy{} Severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{unemploy\PYZus{}none}\PY{p}{,} \PY{n}{unemploy\PYZus{}severe}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{smaller}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dry \PYZhy{} Moderate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{unemploy\PYZus{}dry}\PY{p}{,} \PY{n}{unemploy\PYZus{}moderate}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{smaller}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dry \PYZhy{} Severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{unemploy\PYZus{}dry}\PY{p}{,} \PY{n}{unemploy\PYZus{}severe}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{smaller}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Moderate \PYZhy{} Severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{unemploy\PYZus{}moderate}\PY{p}{,} \PY{n}{unemploy\PYZus{}severe}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{smaller}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+             \PY{p}{\PYZcb{}}\PY{p}{,}
+             \PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t statistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{df}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Overall Comparisons for Change in Unemployment by Drought Level
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}62}]:}                    t statistic   p value    df
+         None - Dry           -0.307547  0.379828  52.0
+         None - Moderate      -0.694435  0.245250  52.0
+         None - Severe        -0.187516  0.426000  51.0
+         Dry - Moderate       -0.186549  0.426400  48.0
+         Dry - Severe          0.131935  0.552201  47.0
+         Moderate - Severe     0.395975  0.653042  47.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{c+c1}{\PYZsh{} perform ANOVA test to double check t\PYZhy{}test results}
+         \PY{c+c1}{\PYZsh{} perform Kruskal\PYZhy{}Wallis becuase of skew in histogram to verify results}
+         
+         \PY{p}{(}\PY{n}{f\PYZus{}oneway}\PY{p}{(}\PY{n}{unemploy\PYZus{}none}\PY{p}{,} \PY{n}{unemploy\PYZus{}dry}\PY{p}{,} \PY{n}{unemploy\PYZus{}moderate}\PY{p}{,} \PY{n}{unemploy\PYZus{}severe}\PY{p}{)}\PY{p}{,} 
+         \PY{n}{kruskal}\PY{p}{(}\PY{n}{unemploy\PYZus{}none}\PY{p}{,} \PY{n}{unemploy\PYZus{}dry}\PY{p}{,} \PY{n}{unemploy\PYZus{}moderate}\PY{p}{,} \PY{n}{unemploy\PYZus{}severe}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}63}]:} (F\_onewayResult(statistic=0.10767273203879904, pvalue=0.95543131595506314),
+          KruskalResult(statistic=1.6867551132013705, pvalue=0.63988244094126157))
+\end{Verbatim}
+            
+    Next, effects of drought levels were compared for each socio-economic
+group. The following histograms show that because of the relatively
+small sample size, we could not ensure the normality assumption was met,
+and so the Kruskal-Wallis non-parametric test was used rather than
+two-sample t-tests to test for difference in means across groups.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mf}{3.5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Select Histograms of Change in Unemployment from Drought\PYZhy{}SES Groupings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: none, SES: low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: dry, SES: middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: severe, SES: high}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{top}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The first table below shows the results of performing the same tests as
+above, but for each socio-economic group. Again, no significant
+differences were found at a significance level of \(\alpha = 0.05\),
+which suggests no effect of drought on change in unemployment among
+socio-economic groups.
+
+The second table shows the results of comparing changes in unemployment
+of each socio-economic group at each level of drought. This test was
+performed because we hypothesized that lower socio-economic communities
+would be more affected by severe drought levels than higher
+socio-economic groups. No significant differences in means were found,
+which again suggests that drought does not influence change in
+unemployment rates.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{c+c1}{\PYZsh{} perform Kruskal\PYZhy{}Wallis test for difference in means by drought levels across each socio\PYZhy{}economic group}
+         
+         \PY{n}{display}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H statistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} perform Kruskal\PYZhy{}Wallis test for difference in means by socio\PYZhy{}economic group across drought levels}
+         
+         \PY{n}{display}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Moderate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{unemp\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H statistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+        H statistic   p value
+Low        0.408804  0.938418
+Middle     1.189573  0.755506
+High       1.067935  0.784820
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+          H statistic   p value
+None         0.181034  0.913459
+Dry          0.347077  0.840685
+Moderate     0.116308  0.943505
+Severe       0.392000  0.822012
+    \end{verbatim}
+
+    
+    \hypertarget{pay-per-employee-comparisons-by-drought-level-and-ses-group}{%
+\subsubsection{Pay Per Employee Comparisons by Drought Level and SES
+Group}\label{pay-per-employee-comparisons-by-drought-level-and-ses-group}}
+
+    First, overall effects of drought on Pay Per Employee were tested,
+without specifying different socio-economic groups.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} separate different groups}
+         
+         \PY{n}{ppe\PYZus{}none} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ppe\PYZus{}dry} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ppe\PYZus{}moderate} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ppe\PYZus{}severe} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{a1}\PY{p}{,} \PY{n}{a2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yearly change in Pay Per Employee distributions, by Drought Level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{a1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{ppe\PYZus{}none}\PY{p}{)} 
+         \PY{n}{a1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{a1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{ppe\PYZus{}dry}\PY{p}{)}
+         \PY{n}{a1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: abnormally dry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{a2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{ppe\PYZus{}moderate}\PY{p}{)} 
+         \PY{n}{a2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: moderate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{a2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{ppe\PYZus{}severe}\PY{p}{)}
+         \PY{n}{a2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_66_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The following table shows the result of comparing all pairs of drought
+levels and performing t-tests on their yearly change in Pay Per Employee
+means. The table shows that no significant differences in means were
+found at a significance level of \(\alpha = 0.05\), which suggests that
+drought levels do not affect pay per employee. These results were
+verified with the ANOVA test (\texttt{f\_oneway}), and because of the
+skew of the apparent non-normality of one or more histogram, the
+non-parametric Kruskal-Wallis test was used to make sure our conclusions
+were valid (see following two cells). All tests showed lack of
+significant effect.
+
+We used \texttt{alternative=\textquotesingle{}larger\textquotesingle{}}
+because we hypothesized that the change in Pay Per Employee would be
+larger for counties experiencing less severe drought.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Overall Comparisons for Change in ppement by Drought Level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} perform 2 sample t\PYZhy{}test on all pairs of drought levels}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}
+             \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None \PYZhy{} Dry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{ppe\PYZus{}none}\PY{p}{,} \PY{n}{ppe\PYZus{}dry}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{larger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None \PYZhy{} Moderate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{ppe\PYZus{}none}\PY{p}{,} \PY{n}{ppe\PYZus{}moderate}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{larger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} 
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None \PYZhy{} Severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{ppe\PYZus{}none}\PY{p}{,} \PY{n}{ppe\PYZus{}severe}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{larger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dry \PYZhy{} Moderate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{ppe\PYZus{}dry}\PY{p}{,} \PY{n}{ppe\PYZus{}moderate}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{larger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dry \PYZhy{} Severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{ppe\PYZus{}dry}\PY{p}{,} \PY{n}{ppe\PYZus{}severe}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{larger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Moderate \PYZhy{} Severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{ppe\PYZus{}moderate}\PY{p}{,} \PY{n}{ppe\PYZus{}severe}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{larger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+             \PY{p}{\PYZcb{}}\PY{p}{,}
+             \PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t statistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{df}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Overall Comparisons for Change in ppement by Drought Level
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}68}]:}                    t statistic   p value    df
+         None - Dry           -0.529215  0.700546  52.0
+         None - Moderate       0.034361  0.486360  52.0
+         None - Severe        -0.346276  0.634720  51.0
+         Dry - Moderate        0.499017  0.310024  48.0
+         Dry - Severe          0.211716  0.416622  47.0
+         Moderate - Severe    -0.336084  0.630848  47.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{c+c1}{\PYZsh{} perform ANOVA test to double check t\PYZhy{}test results}
+         \PY{c+c1}{\PYZsh{} perform Kruskal\PYZhy{}Wallis becuase of skew in histogram to verify results}
+         
+         \PY{p}{(}\PY{n}{f\PYZus{}oneway}\PY{p}{(}\PY{n}{ppe\PYZus{}none}\PY{p}{,} \PY{n}{ppe\PYZus{}dry}\PY{p}{,} \PY{n}{ppe\PYZus{}moderate}\PY{p}{,} \PY{n}{ppe\PYZus{}severe}\PY{p}{)}\PY{p}{,} 
+         \PY{n}{kruskal}\PY{p}{(}\PY{n}{ppe\PYZus{}none}\PY{p}{,} \PY{n}{ppe\PYZus{}dry}\PY{p}{,} \PY{n}{ppe\PYZus{}moderate}\PY{p}{,} \PY{n}{ppe\PYZus{}severe}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:} (F\_onewayResult(statistic=0.140109153552748, pvalue=0.93575640816728434),
+          KruskalResult(statistic=0.29864161365912878, pvalue=0.96028375337452365))
+\end{Verbatim}
+            
+    Next, effects of drought levels were compared for each socio-economic
+group. The following histograms show that because of the relatively
+small sample size, we could not ensure the normality assumption was met,
+and so the Kruskal-Wallis non-parametric test was used rather than
+two-sample t-tests to test for difference in means across groups.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mf}{3.5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Select Histograms of Change in Pay Per Employee from Drought\PYZhy{}SES Groupings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: none, SES: low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: dry, SES: middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: severe, SES: high}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{top}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_71_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The first table below shows the results of performing the same tests as
+above, but for each socio-economic group. Again, no significant
+differences were found at a significance level of \(\alpha = 0.05\),
+which suggests no effect of drought on change in Pay Per Employee among
+socio-economic groups.
+
+The second table shows the results of comparing changes in Pay Per
+Employee of each socio-economic group at each level of drought. This
+test was performed because we hypothesized that lower socio-economic
+communities would be more affected by severe drought levels than higher
+socio-economic groups. No significant differences in means were found,
+which again suggests that drought does not influence change in Pay Per
+Employee.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{c+c1}{\PYZsh{} perform Kruskal\PYZhy{}Wallis test for difference in means by drought levels across each socio\PYZhy{}economic group}
+         
+         \PY{n}{display}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H statistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} perform Kruskal\PYZhy{}Wallis test for difference in means by socio\PYZhy{}economic group across drought levels}
+         
+         \PY{n}{display}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Moderate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{ppe\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H statistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+        H statistic   p value
+Low        1.045025  0.790359
+Middle     0.112393  0.990310
+High       1.019565  0.796518
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+          H statistic   p value
+None         0.331418  0.847293
+Dry          0.633231  0.728611
+Moderate     0.825231  0.661917
+Severe       0.033556  0.983362
+    \end{verbatim}
+
+    
+    \hypertarget{establishments-comparisons-by-drought-level}{%
+\subsubsection{Establishments Comparisons by Drought
+Level}\label{establishments-comparisons-by-drought-level}}
+
+    First, overall effects of drought on Number of Establishments were
+tested, without specifying different socio-economic groups.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} separate different groups}
+         
+         \PY{n}{est\PYZus{}none} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{est\PYZus{}dry} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{est\PYZus{}moderate} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{est\PYZus{}severe} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                              \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{a1}\PY{p}{,} \PY{n}{a2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yearly change in Number of Establishments distributions, by Drought Level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{a1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{est\PYZus{}none}\PY{p}{)} 
+         \PY{n}{a1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{a1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{est\PYZus{}dry}\PY{p}{)}
+         \PY{n}{a1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: abnormally dry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{a2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{est\PYZus{}moderate}\PY{p}{)} 
+         \PY{n}{a2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: moderate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{a2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{est\PYZus{}severe}\PY{p}{)}
+         \PY{n}{a2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_77_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The following table shows the result of comparing all pairs of drought
+levels and performing t-tests on their yearly change in Number of
+Establishments means. The table shows that no significant differences in
+means were found at a significance level of \(\alpha = 0.05\), which
+suggests that drought levels do not effect Number of Establishments.
+These results were verified with the ANOVA test (\texttt{f\_oneway}),
+and because of the apparent non-normality of one or more of the
+histograms, the non-parametric Kruskal-Wallis test was used to make sure
+our conclusions were valid (see following two cells). All tests showed
+lack of significant effect.
+
+We used \texttt{alternative=\textquotesingle{}larger\textquotesingle{}}
+because we hypothesized that the change in Number of Establishments
+would be larger (more establishments added per year) for counties
+experiencing less severe drought.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{c+c1}{\PYZsh{}print(\PYZsq{}Overall Comparisons for Change in Number of Establishments by Drought Level\PYZsq{})}
+         
+         \PY{c+c1}{\PYZsh{} perform 2 sample t\PYZhy{}test on all pairs of drought levels}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}
+             \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None \PYZhy{} Dry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{est\PYZus{}none}\PY{p}{,} \PY{n}{est\PYZus{}dry}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{larger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None \PYZhy{} Moderate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{est\PYZus{}none}\PY{p}{,} \PY{n}{est\PYZus{}moderate}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{larger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} 
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None \PYZhy{} Severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{est\PYZus{}none}\PY{p}{,} \PY{n}{est\PYZus{}severe}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{larger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dry \PYZhy{} Moderate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{est\PYZus{}dry}\PY{p}{,} \PY{n}{est\PYZus{}moderate}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{larger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dry \PYZhy{} Severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{est\PYZus{}dry}\PY{p}{,} \PY{n}{est\PYZus{}severe}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{larger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Moderate \PYZhy{} Severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{est\PYZus{}moderate}\PY{p}{,} \PY{n}{est\PYZus{}severe}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{larger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+             \PY{p}{\PYZcb{}}\PY{p}{,}
+             \PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t statistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{df}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{set\PYZus{}caption}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Overall Comparisons for Change in Number of Establishments by Drought Level}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}74}]:} <pandas.io.formats.style.Styler at 0x7fb5ab5a0358>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{c+c1}{\PYZsh{} perform ANOVA test to double check t\PYZhy{}test results}
+         \PY{c+c1}{\PYZsh{} perform Kruskal\PYZhy{}Wallis becuase of skew in histogram to verify results}
+         
+         \PY{p}{(}\PY{n}{f\PYZus{}oneway}\PY{p}{(}\PY{n}{est\PYZus{}none}\PY{p}{,} \PY{n}{est\PYZus{}dry}\PY{p}{,} \PY{n}{est\PYZus{}moderate}\PY{p}{,} \PY{n}{est\PYZus{}severe}\PY{p}{)}\PY{p}{,} 
+         \PY{n}{kruskal}\PY{p}{(}\PY{n}{est\PYZus{}none}\PY{p}{,} \PY{n}{est\PYZus{}dry}\PY{p}{,} \PY{n}{est\PYZus{}moderate}\PY{p}{,} \PY{n}{est\PYZus{}severe}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:} (F\_onewayResult(statistic=0.0098121494442845163, pvalue=0.99865888061582908),
+          KruskalResult(statistic=0.50114599160463058, pvalue=0.9186395702552006))
+\end{Verbatim}
+            
+    Next, effects of drought levels were compared for each socio-economic
+group. The following histograms show that because of the relatively
+small sample size, we could not ensure the normality assumption was met,
+and so the Kruskal-Wallis non-parametric test was used rather than
+two-sample t-tests to test for difference in means across groups.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mf}{3.5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Select Histograms of Change in Number of Establishments from Drought\PYZhy{}SES Groupings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: none, SES: low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: dry, SES: middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: severe, SES: high}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{top}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_82_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The first table below shows the results of performing the same tests as
+above, but for each socio-economic group. Again, no significant
+differences were found at a significance level of \(\alpha = 0.05\),
+which suggests no effect of drought on change in Number of
+Establishments among socio-economic groups.
+
+The second table shows the results of comparing changes in Number of
+Establishments of each socio-economic group at each level of drought.
+This test was performed because we hypothesized that lower
+socio-economic communities would be more affected by severe drought
+levels than higher socio-economic groups. No significant differences in
+means were found, which again suggests that drought does not influence
+change in Number of Establishments.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{c+c1}{\PYZsh{} perform Kruskal\PYZhy{}Wallis test for difference in means by drought levels across each socio\PYZhy{}economic group}
+         
+         \PY{n}{display}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H statistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} perform Kruskal\PYZhy{}Wallis test for difference in means by socio\PYZhy{}economic group across drought levels}
+         
+         \PY{n}{display}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 0, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 1, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Moderate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 2, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Severe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{kruskal}\PY{p}{(}\PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: Middle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                  \PY{n}{est\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drought: 3, SES: High}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H statistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+        H statistic   p value
+Low        0.474448  0.924468
+Middle     0.120000  0.989334
+High       0.985326  0.804803
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+          H statistic   p value
+None         0.181034  0.913459
+Dry          0.018462  0.990812
+Moderate     0.612923  0.736047
+Severe       1.062889  0.587755
+    \end{verbatim}
+
+    
+    The results of the above tests, and in particular the lack of any
+significant differences in mean changes in these variables across the
+different groups, suggests that drought levels do not affect economic
+performance, even across different socio-economic groups.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{c+c1}{\PYZsh{}linear modelling testing}
+         \PY{n}{outcome\PYZus{}1}\PY{p}{,} \PY{n}{predictors\PYZus{}1} \PY{o}{=} \PY{n}{patsy}\PY{o}{.}\PY{n}{dmatrices}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pay\PYZus{}per\PYZus{}employee \PYZti{} drought\PYZus{}level}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{drought\PYZus{}levels}\PY{p}{)}
+         \PY{n}{mod\PYZus{}1} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{p}{(}\PY{n}{outcome\PYZus{}1}\PY{p}{,} \PY{n}{predictors\PYZus{}1}\PY{p}{)}
+         \PY{n}{res\PYZus{}1} \PY{o}{=} \PY{n}{mod\PYZus{}1}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{res\PYZus{}1}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:       pay\_per\_employee   R-squared:                       0.042
+Model:                            OLS   Adj. R-squared:                  0.041
+Method:                 Least Squares   F-statistic:                     42.77
+Date:                Tue, 11 Jun 2019   Prob (F-statistic):           9.87e-11
+Time:                        15:39:23   Log-Likelihood:                -3934.1
+No. Observations:                 986   AIC:                             7872.
+Df Residuals:                     984   BIC:                             7882.
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+=================================================================================
+                    coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------
+Intercept        34.2213      0.609     56.174      0.000      33.026      35.417
+drought\_level     2.1898      0.335      6.540      0.000       1.533       2.847
+==============================================================================
+Omnibus:                      483.265   Durbin-Watson:                   0.234
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             3019.477
+Skew:                           2.196   Prob(JB):                         0.00
+Kurtosis:                      10.362   Cond. No.                         3.14
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{c+c1}{\PYZsh{}this one can be changed for whatver we want it to be, ses\PYZus{}group could be poverty\PYZus{}percent it could be lvl[0\PYZhy{}4]}
+         \PY{c+c1}{\PYZsh{}in the end it shows that drought alone seems to correlate well, but when adding in any of these other more detailed}
+         \PY{c+c1}{\PYZsh{}factors, the p value shoots up and it begins to break downz}
+         \PY{n}{outcome\PYZus{}2}\PY{p}{,} \PY{n}{predictors\PYZus{}2} \PY{o}{=} \PY{n}{patsy}\PY{o}{.}\PY{n}{dmatrices}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pay\PYZus{}per\PYZus{}employee \PYZti{} drought\PYZus{}level : ses\PYZus{}group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{drought\PYZus{}levels}\PY{p}{)}
+         \PY{n}{mod\PYZus{}2} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{p}{(}\PY{n}{outcome\PYZus{}2}\PY{p}{,} \PY{n}{predictors\PYZus{}2}\PY{p}{)}
+         \PY{n}{res\PYZus{}2} \PY{o}{=} \PY{n}{mod\PYZus{}2}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{res\PYZus{}2}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:       pay\_per\_employee   R-squared:                       0.159
+Model:                            OLS   Adj. R-squared:                  0.157
+Method:                 Least Squares   F-statistic:                     62.02
+Date:                Tue, 11 Jun 2019   Prob (F-statistic):           1.01e-36
+Time:                        15:39:24   Log-Likelihood:                -3869.5
+No. Observations:                 986   AIC:                             7747.
+Df Residuals:                     982   BIC:                             7767.
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+===================================================================================================
+                                      coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------------------------
+Intercept                          34.1776      0.571     59.834      0.000      33.057      35.299
+drought\_level:ses\_group[Low]        0.0137      0.435      0.031      0.975      -0.839       0.866
+drought\_level:ses\_group[Middle]     1.7006      0.391      4.348      0.000       0.933       2.468
+drought\_level:ses\_group[High]       6.9198      0.527     13.139      0.000       5.886       7.953
+==============================================================================
+Omnibus:                      415.819   Durbin-Watson:                   0.303
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1995.489
+Skew:                           1.933   Prob(JB):                         0.00
+Kurtosis:                       8.798   Cond. No.                         2.69
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+    \end{Verbatim}
+
+    \hypertarget{ethics-privacy}{%
+\section{Ethics \& Privacy}\label{ethics-privacy}}
+
+    As the data for this research will only require looking at quantitative
+measures such as income values or disease rates, there will be no need
+for personal information if it presents itself. To best protect the
+privacy of the individuals we are collecting data from, all personal
+information not related to the data sets specifically (such as name or
+address of the household we are collecting utility data from) will be
+removed in the end results. We do not believe though that our question
+or datasets are invasive in nature and predict this will be of little
+occurrence if any. For our analyses, being aware of the racial
+inequalities present in low income communities is important. Before
+making any specific generalizations, we will make sure (if the data is
+available) that the ethnicities of households or individuals that are
+making up the census data are representative of the communities we are
+looking at.
+
+We assigned SES (social economic status) according to the poverty
+percentage, whereas usually it also takes into consideration education
+and occupation. Drawing conclusions
+
+    \hypertarget{conclusions-and-discussion}{%
+\section{Conclusions and Discussion}\label{conclusions-and-discussion}}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
